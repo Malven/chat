@@ -13,7 +13,7 @@ function Members({ channelId }) {
       <div>
         {members.map(member => (
           <div key={member.uid} className="Member">
-            <div className="MemberStatus online" />
+            <div className={`MemberStatus ${member.status.state}`} />
             {member.displayName}
           </div>
         ))}

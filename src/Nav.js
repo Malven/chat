@@ -9,7 +9,7 @@ function Nav({ user }) {
   return (
     <div className="Nav">
       <div className="User">
-        <img className="UserImage" alt="whatever" src={user.photoUrl} />
+        <img className="UserImage" alt="user profile" src={user.photoUrl} />
         <div>
           <div>{user.displayName}</div>
           <div>
