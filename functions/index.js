@@ -8,41 +8,6 @@ const db = admin.firestore();
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 
-const bot = {
-  displayName: 'Cleverbot',
-  photoUrl: 'https://i.imgur.com/oW1dGDI.jpg',
-  uid: 'cleverbot',
-  status: {
-    lastChanged: new Date(),
-    state: 'online'
-  },
-  channels: {
-    general: true
-  }
-};
-
-db.collection('users')
-  .doc(bot.uid)
-  .set(bot, { merge: true });
-
-exports.onCleverbotMessage = functions.firestore
-  .document('channels/general/messages/{messageId}')
-  .onCreate((doc, context) => {
-    const message = doc.data();
-    if (
-      !message.text.startsWith('@Cleverbot') ||
-      !message.text.startsWith('@cleverbot')
-    ) {
-      return null;
-    }
-
-    return db.collection('channels/general/messages').add({
-      text: 'hey',
-      user: db.collection('users').doc('cleverbot'),
-      created: new Date(Date.now() + 1000)
-    });
-  });
-
 exports.onUserStatusChanged = functions.database
   .ref('/status/{userId}')
   .onUpdate((change, context) => {
